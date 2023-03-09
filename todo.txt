@@ -1,0 +1,95 @@
+==========================================
+Games are not software
+==========================================
+
+IDEA: What if we make a tiny game engine/runner 
+BUT...
+it's really limited in what is can do.
+
+game_engine_editor.exe
+game_engine_runner.exe
+
+Most features will be the simplest possible.
+No need for shaders, resource manager, etc...
+
+If we design each subsystem to be self-contained and
+have very few features it will be easier to get something going.
+
+For example: Animation
+Do we need to support spine?  No.
+
+Sprites?  What if there are no sprite, only shapes and single colors.
+
+
+
+-----------------
+https://gamemaker.io/en/tutorials/make-arcade-space-shooter
+
+This is a tutorial for making a game in game maker.
+Could we do the same thing with custom code?
+
+What is next...
+
+Create object player
+
+    How does that work?
+
+    Normally I would write code to do it.
+    obj_t player = new obj_t();
+
+    player.sprite = ship;
+
+
+    But how would there be a bunch of files compressed
+    into the game file that does this?
+
+    could we put everything into a json file?
+
+    object = {
+        name = "player",
+        sprite = "ship"
+    }
+
+That's actually pretty easy.
+
+We can create a game obj that is just the singleton thingy
+
+    object = {
+        name = "game",
+        ...
+    }
+
+But let's say we want to script all this stuff too.
+We can do that with lua, right?
+
+lua 5.4 has been out for a year now, so it's still under development...
+
+We can attach the script to each obj and let that do the game specific stuff.
+We could even pre-compile all the scripts to include in the game.
+
+Hmm, this is getting interesting...
+
+We can attch scripts to objects.
+
+    object.script = "player_script",
+
+The lua script for the object will call stuff like
+
+-- player_script.lua
+function init()
+
+end
+
+function update()
+
+end
+
+etc...
+
+
+Another part of this is that the level, or Room,
+is an asset.  We can spawn instances of objects in the room
+and add triggers and stuff.
+
+It should be pretty easy to make all this stuff, but I
+bet the devil is in the details for sure...
